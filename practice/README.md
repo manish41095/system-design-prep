@@ -1,10 +1,19 @@
 # Mock Interview Tracker
 
-Start with the [practice guide](how-to-practice.md), then follow the [first seven sessions](first-week.md). Multi-tenancy is deferred and is not part of this queue.
+Start with the [answer framework](answer-framework.md), follow the [first seven sessions](first-week.md), and choose later problems from the [mock bank](mock-bank.md). Multi-tenancy is deferred and is not part of this queue.
+
+## Practice workflow
+
+1. Run the prompt without notes and preserve the original attempt.
+2. Save the transcript, diagram or Java code under [mocks](mocks/README.md).
+3. Score only observable evidence.
+4. Add the top three gaps to the error log.
+5. Complete small corrective exercises.
+6. Re-attempt the same problem after 7–14 days and compare decisions.
 
 ## How to run a mock
 
-Use a 45–60 minute timer and no notes. Ask another person or ChatGPT to act as interviewer. Share only the problem statement, not the reference answer. Think aloud, ask clarifying questions, draw a diagram and defend trade-offs. Save your actual answer before reviewing feedback. Do not invent scores or completed work.
+Use a 45–60 minute timer and no notes. Ask another person or ChatGPT to act as interviewer. Share only the problem statement, not a reference answer. Think aloud, ask clarifying questions, draw a diagram and defend trade-offs. Save your actual answer before reviewing feedback. Do not invent scores or completed work.
 
 For HLD, spend approximately 5 minutes on requirements, 5 on estimates, 5 on APIs/data, 15 on architecture, 15 on deep dives and 5–10 on failures/trade-offs. For LLD, spend approximately 5 on requirements, 10 on entities/classes, 5 on patterns, 25 on code/tests and 5–10 on trade-offs. Adjust based on the interviewer.
 
@@ -49,6 +58,6 @@ Useful feedback is specific: “Could not explain duplicate payment prevention�
 
 ## After every mock
 
-Save the transcript/diagram/code in `practice/mocks/YYYY-MM-DD-problem-attempt-01.md`. Record the five scores, three exact gaps, corrective exercises and a re-attempt date. Revise the gaps, then re-attempt after approximately 7–14 days. Compare answers and mark a gap verified only when the missed follow-up can be answered without notes. Use the [mock template](../templates/README.md). Update the relevant HLD/LLD and concept rows only when evidence supports the new status.
+Save the transcript/diagram/code in **practice/mocks/YYYY-MM-DD-problem-attempt-01.md** using the [mock template](mocks/mock-template.md). Record the five scores, three exact gaps, corrective exercises and a re-attempt date. Revise the gaps, then re-attempt after approximately 7–14 days. Compare answers and mark a gap verified only when the missed follow-up can be answered without notes. Update the relevant HLD/LLD and concept rows only when evidence supports the new status.
 
 To practice with ChatGPT, use the interviewer prompt in [how-to-practice.md](how-to-practice.md). Ask it to evaluate your actual answer rather than generating a model answer before you try.
