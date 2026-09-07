@@ -1,6 +1,17 @@
 # Mock Interview Tracker
 
-Start with the [answer framework](answer-framework.md), follow the [first seven sessions](first-week.md), and choose later problems from the [mock bank](mock-bank.md). Multi-tenancy is deferred and is not part of this queue.
+## New to mocks?
+
+Use **[Start Here — Run Your First Mock and Save It to Git](start-here.md)**. It shows:
+
+- Who asks the questions.
+- The exact URL-shortener questions.
+- Where to write every answer and follow-up.
+- How to score the attempt.
+- Which tracker rows to update.
+- Exact clone, branch, add, commit and push commands.
+
+Use the [question-by-question answer sheet](mocks/url-shortener-answer-template.md) for your first attempt.
 
 ## Practice workflow
 
@@ -15,7 +26,7 @@ Start with the [answer framework](answer-framework.md), follow the [first seven 
 
 Use a 45–60 minute timer and no notes. Ask another person or ChatGPT to act as interviewer. Share only the problem statement, not a reference answer. Think aloud, ask clarifying questions, draw a diagram and defend trade-offs. Save your actual answer before reviewing feedback. Do not invent scores or completed work.
 
-For HLD, spend approximately 5 minutes on requirements, 5 on estimates, 5 on APIs/data, 15 on architecture, 15 on deep dives and 5–10 on failures/trade-offs. For LLD, spend approximately 5 on requirements, 10 on entities/classes, 5 on patterns, 25 on code/tests and 5–10 on trade-offs. Adjust based on the interviewer.
+For HLD, spend approximately 5 minutes on requirements, 5 on estimates, 5 on APIs/data, 15 on architecture, 15 on deep dives and 5–10 on failures/trade-offs. For LLD, spend approximately 5 on requirements, 10 on entities/classes, 5 on patterns, 25 on code/tests and 5–10 on trade-offs. Adjust based on the interviewer. The [answer framework](answer-framework.md) gives the complete speaking structure.
 
 ## Scoring rubric
 
@@ -32,6 +43,8 @@ Score each category from 0 to 10. A score of 5 means partial understanding; 7 me
 **Total:** /50. Record HLD/LLD type, actual duration and who evaluated it. A self-score is not an external interview score. Use trends and specific feedback, not just totals.
 
 ## Planned mock queue
+
+The full question prompts and interviewer probes are in the [mock bank](mock-bank.md).
 
 | # | Type | Problem | Focus | Date | Score /50 | Top gap | Re-attempt |
 |---|---|---|---|---|---|---|---|
@@ -58,6 +71,6 @@ Useful feedback is specific: “Could not explain duplicate payment prevention�
 
 ## After every mock
 
-Save the transcript/diagram/code in **practice/mocks/YYYY-MM-DD-problem-attempt-01.md** using the [mock template](mocks/mock-template.md). Record the five scores, three exact gaps, corrective exercises and a re-attempt date. Revise the gaps, then re-attempt after approximately 7–14 days. Compare answers and mark a gap verified only when the missed follow-up can be answered without notes. Update the relevant HLD/LLD and concept rows only when evidence supports the new status.
+Save the transcript/diagram/code in **practice/mocks/YYYY-MM-DD-problem-attempt-01.md** using the [generic mock template](mocks/mock-template.md). For Mock 01, use the clearer [URL-shortener answer sheet](mocks/url-shortener-answer-template.md). Record the five scores, three exact gaps, corrective exercises and a re-attempt date.
 
-To practice with ChatGPT, use the interviewer prompt in [how-to-practice.md](how-to-practice.md). Ask it to evaluate your actual answer rather than generating a model answer before you try.
+Revise the gaps, then re-attempt after approximately 7–14 days. Compare answers and mark a gap verified only when the missed follow-up can be answered without notes. Update the relevant HLD/LLD and concept rows only when evidence supports the new status.
