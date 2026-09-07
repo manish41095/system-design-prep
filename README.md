@@ -9,9 +9,12 @@ A personal learning, revision and mock-interview workspace for experienced Java 
 | Workspace | Purpose |
 |---|---|
 | [Practice guide](practice/how-to-practice.md) | Exact daily workflow and how to update GitHub |
-| [First seven sessions](practice/first-week.md) | Start with URL shortener, caching, rate limiting and LLD |
-| [Mock tracker](practice/README.md) | Ten planned mocks, scores and re-attempts |
-| [Mock 01: URL shortener](practice/mock-01-url-shortener.md) | A complete timed HLD interview prompt |
+| [45–60 minute answer framework](practice/answer-framework.md) | HLD/LLD timebox, decision language and recovery when stuck |
+| [First seven sessions](practice/first-week.md) | Start with URL shortener, caching, rate limiting and Java LLD |
+| [Mock tracker](practice/README.md) | Ten planned mocks, scores, error log and re-attempts |
+| [Mock bank](practice/mock-bank.md) | Candidate prompts and interviewer probes for ten problems |
+| [Mock 01: URL shortener](practice/mock-01-url-shortener.md) | Complete baseline HLD interview pack |
+| [Completed attempts](practice/mocks/README.md) | Dated transcripts, diagrams, scorecards and comparisons |
 | [Concept tracker](concepts/README.md) | Fundamentals, internals, trade-offs and revision |
 | [HLD tracker](hld/README.md) | Architecture problems and design evidence |
 | [LLD tracker](lld/README.md) | Requirements, classes, patterns, Java code and tests |
