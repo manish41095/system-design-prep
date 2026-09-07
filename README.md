@@ -4,18 +4,24 @@ A personal learning, revision and mock-interview workspace for experienced Java 
 
 **Learn → Explain → Apply → Mock → Fix gaps → Re-solve.** The goal is interview readiness, not collecting completed checkboxes.
 
-## Start here
+## Start practicing
 
 | Workspace | Purpose |
 |---|---|
+| [Practice guide](practice/how-to-practice.md) | Exact daily workflow and how to update GitHub |
+| [First seven sessions](practice/first-week.md) | Start with URL shortener, caching, rate limiting and LLD |
+| [Mock tracker](practice/README.md) | Ten planned mocks, scores and re-attempts |
+| [Mock 01: URL shortener](practice/mock-01-url-shortener.md) | A complete timed HLD interview prompt |
 | [Concept tracker](concepts/README.md) | Fundamentals, internals, trade-offs and revision |
-| [HLD tracker](hld/README.md) | Timed architecture problems and design evidence |
+| [HLD tracker](hld/README.md) | Architecture problems and design evidence |
 | [LLD tracker](lld/README.md) | Requirements, classes, patterns, Java code and tests |
-| [Mock tracker](practice/README.md) | Scores, recurring weaknesses and re-attempts |
-| [Multi-tenant SaaS](hld/multi-tenant-saas.md) | Priority learning exercise for Tech Lead interviews |
 | [Interview templates](templates/README.md) | Repeatable answer, concept and mock formats |
 | [Weekly plan](practice/weekly-plan.md) | Sustainable daily and weekly practice |
 | [Project experience](practice/project-experience.md) | Turn real work into credible interview stories |
+
+## Current focus
+
+Start with system-design fundamentals, URL shortener, caching, databases, messaging and Java LLD. Multi-tenancy is deferred until you choose to revisit it. The existing study exercise remains available at [Multi-tenant SaaS](hld/multi-tenant-saas.md), but is not part of the active plan or mock queue.
 
 ## Progress rules
 
@@ -30,9 +36,5 @@ For HLD use requirements → scale → APIs → data model → architecture → 
 ## Weekly workflow
 
 Study concepts and apply them to a design during the week. Complete one timed 45–60 minute mock, record the top three gaps, revise them and re-attempt weak designs after 7–14 days. Update the tracker with evidence and the next action after each session.
-
-## Priority
-
-Multi-tenancy is a specific learning gap, not a claimed production skill. Build a tenant-aware SaaS design and explain isolation, authorization, persistence, caching and background jobs. Connect other concepts to genuine Java/Spring Boot backend experience where appropriate.
 
 Reference inspiration: [ShubhamChouksey123/system-design](https://github.com/ShubhamChouksey123/system-design). This is an independently structured personal tracker; its scores and completion history are not copied.
