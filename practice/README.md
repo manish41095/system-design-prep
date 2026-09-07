@@ -1,6 +1,12 @@
 # Mock Interview Tracker
 
-Run a 45–60 minute mock without notes. Record the actual score and evidence immediately afterward. The purpose is to identify and fix weaknesses, not to maximize the number of attempts.
+Start with the [practice guide](how-to-practice.md), then follow the [first seven sessions](first-week.md). Multi-tenancy is deferred and is not part of this queue.
+
+## How to run a mock
+
+Use a 45–60 minute timer and no notes. Ask another person or ChatGPT to act as interviewer. Share only the problem statement, not the reference answer. Think aloud, ask clarifying questions, draw a diagram and defend trade-offs. Save your actual answer before reviewing feedback. Do not invent scores or completed work.
+
+For HLD, spend approximately 5 minutes on requirements, 5 on estimates, 5 on APIs/data, 15 on architecture, 15 on deep dives and 5–10 on failures/trade-offs. For LLD, spend approximately 5 on requirements, 10 on entities/classes, 5 on patterns, 25 on code/tests and 5–10 on trade-offs. Adjust based on the interviewer.
 
 ## Scoring rubric
 
@@ -9,27 +15,29 @@ Score each category from 0 to 10. A score of 5 means partial understanding; 7 me
 | Category | What good looks like |
 |---|---|
 | Requirements /10 | Clarifies scope, scale, constraints and priorities |
-| Architecture /10 | Coherent components, APIs, data model and request flows |
-| Problem-solving /10 | Solves critical challenges with correct reasoning |
-| Scale and trade-offs /10 | Justifies choices, handles failures and bottlenecks |
+| Architecture /10 | Coherent components, APIs, data model and request flows; for LLD, class design and interfaces |
+| Problem-solving /10 | Solves critical challenges with correct reasoning and working code where required |
+| Scale and trade-offs /10 | Justifies choices, handles failures, concurrency and bottlenecks |
 | Communication /10 | Structured explanation, time management, clear follow-ups |
 
-**Total:** /50. Use the same rubric for every mock. Record HLD/LLD type and actual duration. Scores are not directly comparable across different interviewers or problem difficulty; use trends and specific feedback.
+**Total:** /50. Record HLD/LLD type, actual duration and who evaluated it. A self-score is not an external interview score. Use trends and specific feedback, not just totals.
 
-## Mock history
+## Planned mock queue
 
-| # | Date | Type | Problem | Duration | Requirements | Architecture | Problem-solving | Scale/trade-offs | Communication | Total /50 | Top gap | Re-attempt |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 01 | — | HLD | Multi-tenant SaaS | — | — | — | — | — | — | — | — | — |
-| 02 | — | HLD | URL shortener | — | — | — | — | — | — | — | — | — |
-| 03 | — | LLD | Vending machine | — | — | — | — | — | — | — | — | — |
-| 04 | — | HLD | Notification system | — | — | — | — | — | — | — | — | — |
-| 05 | — | LLD | Movie ticket booking | — | — | — | — | — | — | — | — | — |
-| 06 | — | HLD | Food delivery | — | — | — | — | — | — | — | — | — |
-| 07 | — | HLD | Media storage | — | — | — | — | — | — | — | — | — |
-| 08 | — | LLD | Ride sharing | — | — | — | — | — | — | — | — | — | — |
-| 09 | — | HLD | Payment processing | — | — | — | — | — | — | — | — | — | — |
-| 10 | — | HLD/LLD | Weakest previous problem | — | — | — | — | — | — | — | — | — |
+| # | Type | Problem | Focus | Date | Score /50 | Top gap | Re-attempt |
+|---|---|---|---|---|---|---|---|
+| 01 | HLD | [URL shortener](mock-01-url-shortener.md) | Requirements, estimation, DB, cache | — | — | — | — |
+| 02 | LLD | Vending machine | State pattern, interfaces, Java tests | — | — | — | — |
+| 03 | HLD | Notification system | Kafka, retries, DLQ, idempotency | — | — | — | — |
+| 04 | LLD | Movie ticket booking | Concurrency, locking, state transitions | — | — | — | — |
+| 05 | HLD | Rate limiter | Algorithms, Redis, distributed correctness | — | — | — | — |
+| 06 | HLD | Food delivery | Order lifecycle, location, dispatch | — | — | — | — |
+| 07 | HLD | Media storage | Uploads, metadata, retrieval, cleanup | — | — | — | — |
+| 08 | LLD | Ride sharing | Strategy, matching, state and extensibility | — | — | — | — |
+| 09 | HLD | Payment processing | Idempotency, ledger, consistency, recovery | — | — | — | — |
+| 10 | HLD/LLD | Weakest previous problem | Re-solve and defend missed follow-ups | — | — | — | — |
+
+The queue is a plan, not a deadline. Replace a later problem if mock feedback reveals a more important gap.
 
 ## Error log
 
@@ -37,10 +45,10 @@ Score each category from 0 to 10. A score of 5 means partial understanding; 7 me
 |---|---|---|---|---|---|---|
 | — | — | — | — | — | — | — |
 
-Examples of useful feedback: “Could not explain duplicate payment prevention,” “Forgot tenant isolation in background jobs,” or “Spent 25 minutes on requirements and did not reach scaling.” Avoid vague entries such as “Need to improve HLD.”
+Useful feedback is specific: “Could not explain duplicate payment prevention” or “Spent 25 minutes on requirements and did not reach scaling.” Avoid “Need to improve HLD.”
 
-## Re-attempt rule
+## After every mock
 
-After a mock, select the top three gaps. Study the relevant concepts, write or code a focused exercise, then re-attempt the same problem after approximately 7–14 days. Compare the original and new answers. Mark a gap verified only when you can answer the missed follow-up without notes.
+Save the transcript/diagram/code in `practice/mocks/YYYY-MM-DD-problem-attempt-01.md`. Record the five scores, three exact gaps, corrective exercises and a re-attempt date. Revise the gaps, then re-attempt after approximately 7–14 days. Compare answers and mark a gap verified only when the missed follow-up can be answered without notes. Use the [mock template](../templates/README.md). Update the relevant HLD/LLD and concept rows only when evidence supports the new status.
 
-Copy the [mock template](../templates/README.md) into a dated file such as `mocks/2026-09-07-multi-tenant-saas.md` when you perform an actual mock. Never invent dates, scores or completed work.
+To practice with ChatGPT, use the interviewer prompt in [how-to-practice.md](how-to-practice.md). Ask it to evaluate your actual answer rather than generating a model answer before you try.
