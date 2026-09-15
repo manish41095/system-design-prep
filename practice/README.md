@@ -11,7 +11,7 @@ Use **[Start Here — Run Your First Mock and Save It to Git](start-here.md)**. 
 - Which tracker rows to update.
 - Exact clone, branch, add, commit and push commands.
 
-Use the [question-by-question answer sheet](mocks/url-shortener-answer-template.md) for your first attempt.
+Use the [question-by-question answer sheet](mocks/url-shortener-answer-template.md) for a URL-shortener attempt.
 
 ## Practice workflow
 
@@ -48,7 +48,7 @@ The full question prompts and interviewer probes are in the [mock bank](mock-ban
 
 | # | Type | Problem | Focus | Date | Score /50 | Top gap | Re-attempt |
 |---|---|---|---|---|---|---|---|
-| 01 | HLD | [URL shortener](mock-01-url-shortener.md) | Requirements, estimation, DB, cache | — | — | — | — |
+| 01 | HLD | [URL shortener prompt](mock-01-url-shortener.md) · [Attempt 01](mocks/2026-09-15-url-shortener-attempt-01.md) | Requirements, estimation, DB, cache | 2026-09-15 | 34/50 | Estimation and cache failure handling | 2026-09-24 |
 | 02 | LLD | Vending machine | State pattern, interfaces, Java tests | — | — | — | — |
 | 03 | HLD | Notification system | Kafka, retries, DLQ, idempotency | — | — | — | — |
 | 04 | LLD | Movie ticket booking | Concurrency, locking, state transitions | — | — | — | — |
@@ -65,12 +65,14 @@ The queue is a plan, not a deadline. Replace a later problem if mock feedback re
 
 | Date | Problem | Exact weakness | Root cause | Corrective exercise | Due date | Verified? |
 |---|---|---|---|---|---|---|
-| — | — | — | — | — | — | — |
+| 2026-09-15 | URL shortener | QPS/storage calculations were not completed; bytes and KB were confused | Calculation step was skipped | Recalculate QPS/storage and connect every number to a design decision | 2026-09-17 | No |
+| 2026-09-15 | URL shortener | Cache expiry, stampede, hot key and Redis failure were unanswered | Eviction was treated as the complete caching strategy | Draw and explain the four cache failure paths in five minutes | 2026-09-18 | No |
+| 2026-09-15 | URL shortener | Analytics reliability, security, multi-region failure and final summary were not attempted | Mock stopped during the cache deep dive | Deliver a five-minute reliability close and two-minute design summary | 2026-09-20 | No |
 
 Useful feedback is specific: “Could not explain duplicate payment prevention” or “Spent 25 minutes on requirements and did not reach scaling.” Avoid “Need to improve HLD.”
 
 ## After every mock
 
-Save the transcript/diagram/code in **practice/mocks/YYYY-MM-DD-problem-attempt-01.md** using the [generic mock template](mocks/mock-template.md). For Mock 01, use the clearer [URL-shortener answer sheet](mocks/url-shortener-answer-template.md). Record the five scores, three exact gaps, corrective exercises and a re-attempt date.
+Save the transcript/diagram/code in **practice/mocks/YYYY-MM-DD-problem-attempt-01.md** using the [generic mock template](mocks/mock-template.md). For URL shortener, use the clearer [answer sheet](mocks/url-shortener-answer-template.md). Record the five scores, three exact gaps, corrective exercises and a re-attempt date.
 
 Revise the gaps, then re-attempt after approximately 7–14 days. Compare answers and mark a gap verified only when the missed follow-up can be answered without notes. Update the relevant HLD/LLD and concept rows only when evidence supports the new status.
