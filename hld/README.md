@@ -5,7 +5,7 @@ Use 45–60 minutes for a timed attempt. Each problem should have a requirements
 | # | Problem | Priority | Status | Confidence /5 | Last attempt | Next action |
 |---|---|---|---|---|---|---|
 | 1 | Multi-tenant supply-chain SaaS | Very High | Not started | — | — | [Start exercise](multi-tenant-saas.md) |
-| 2 | URL shortener | High | Not started | — | — | Estimation, key generation, cache |
+| 2 | URL shortener | High | Learning | 3/5 | [Attempt 01 — 2026-09-15](../practice/mocks/2026-09-15-url-shortener-attempt-01.md) | Fix estimation/cache gaps; re-attempt 2026-09-24 |
 | 3 | Rate limiter | High | Not started | — | — | Distributed token bucket |
 | 4 | Notification system | High | Not started | — | — | Queue, retry, preference, DLQ |
 | 5 | File storage / media server | High | Not started | — | — | Upload, metadata, retrieval, cleanup |

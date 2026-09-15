@@ -4,12 +4,12 @@ Update status, confidence, revision dates and evidence after each session. `—`
 
 | Topic | Priority | Status | Confidence /5 | Last revised | Next action |
 |---|---|---|---|---|---|
-| Back-of-envelope estimation, QPS, storage, bandwidth | High | Not started | — | — | Estimate a URL shortener |
-| Latency, throughput, availability and SLOs | High | Not started | — | — | Explain trade-offs with examples |
+| Back-of-envelope estimation, QPS, storage, bandwidth | High | Learning | 2/5 | 2026-09-15 | Recalculate [Mock 01](../practice/mocks/2026-09-15-url-shortener-attempt-01.md) without notes |
+| Latency, throughput, availability and SLOs | High | Learning | 2/5 | 2026-09-15 | Add numeric latency and availability targets |
 | Horizontal vs vertical scaling | High | Not started | — | — | Design stateless scaling |
-| Load balancing, L4/L7, health checks | High | Not started | — | — | Explain failure handling |
+| Load balancing, L4/L7, health checks | High | Learning | 2/5 | 2026-09-15 | Explain gateway/LB roles and unhealthy-instance removal |
 | DNS, HTTP/HTTPS, TLS, TCP, HTTP/2 and HTTP/3 | Medium | Not started | — | — | Trace request end-to-end |
-| REST, gRPC, WebSocket and API versioning | High | Not started | — | — | Select API style for a use case |
+| REST, gRPC, WebSocket and API versioning | High | Learning | 2/5 | 2026-09-15 | Correct redirect API and 301/302 explanation |
 | API gateway, service discovery and configuration | High | Not started | — | — | Design service communication |
 | Database indexes, composite indexes and query plans | High | Not started | — | — | Explain EXPLAIN and index order |
 | Transactions, isolation levels and MVCC | High | Not started | — | — | Explain concurrent updates |
@@ -17,11 +17,12 @@ Update status, confidence, revision dates and evidence after each session. `—`
 | Replication, read replicas and failover | High | Not started | — | — | Explain lag and consistency |
 | Partitioning vs sharding | High | Not started | — | — | Design a growing table |
 | Consistent hashing and virtual nodes | High | Not started | — | — | Explain node addition/removal |
-| SQL vs NoSQL and data-model trade-offs | High | Not started | — | — | Choose storage for three workloads |
+| Unique ID and short-code generation | High | Can explain | 4/5 | 2026-09-15 | Defend block allocation and keyed obfuscation on re-attempt |
+| SQL vs NoSQL and data-model trade-offs | High | Can explain | 3/5 | 2026-09-15 | Add access-driven indexes and consistency choice |
 | CAP, consistency models and quorum | High | Not started | — | — | Explain a network partition |
-| Caching patterns and TTL | High | Not started | — | — | Design cache-aside |
-| Cache invalidation, stampede and hot keys | High | Not started | — | — | Handle stale/hot data |
-| Redis data structures and distributed cache | High | Not started | — | — | Choose keys and expiry |
+| Caching patterns and TTL | High | Learning | 3/5 | 2026-09-15 | Tie cache TTL to URL expiration |
+| Cache invalidation, stampede and hot keys | High | Learning | 1/5 | 2026-09-15 | Explain expiry, single-flight, jitter and hot-key mitigation |
+| Redis data structures and distributed cache | High | Learning | 2/5 | 2026-09-15 | Explain Redis node failure and protected DB fallback |
 | Kafka topics, partitions, consumer groups | High | Not started | — | — | Explain ordering and scaling |
 | Delivery semantics, retries and DLQ | High | Not started | — | — | Handle duplicate events |
 | Idempotency and transactional outbox | High | Not started | — | — | Design reliable order events |
@@ -29,7 +30,7 @@ Update status, confidence, revision dates and evidence after each session. `—`
 | Rate limiting and backpressure | High | Not started | — | — | Implement token bucket |
 | Timeouts, retries, circuit breakers, bulkheads | High | Not started | — | — | Prevent cascading failures |
 | Distributed locks, leases and fencing tokens | High | Not started | — | — | Explain stale lock owner |
-| Leader election and coordination | Medium | Not started | — | — | Design single-active worker |
+| Leader election and coordination | Medium | Can explain | 3/5 | 2026-09-15 | Explain allocator failover and block durability |
 | Object storage, CDN and presigned URLs | High | Not started | — | — | Design media upload/download |
 | Search indexing and eventual consistency | Medium | Not started | — | — | Design search synchronization |
 | OAuth2, OIDC, JWT and service authentication | High | Not started | — | — | Trace authenticated request |
@@ -37,7 +38,7 @@ Update status, confidence, revision dates and evidence after each session. `—`
 | Tenant-aware caching, jobs and observability | Very High | Not started | — | — | Prove cross-tenant isolation |
 | Logs, metrics, traces and correlation IDs | High | Not started | — | — | Debug a slow request |
 | SLI/SLO, alerting and error budgets | Medium | Not started | — | — | Define service objectives |
-| Capacity planning, load testing and bottlenecks | High | Not started | — | — | Analyze a bounded thread pool |
+| Capacity planning, load testing and bottlenecks | High | Learning | 2/5 | 2026-09-15 | Connect URL-shortener estimates to design decisions |
 | Deployment, rolling/canary release and rollback | Medium | Not started | — | — | Plan zero-downtime deployment |
 | Backup, restore, RPO/RTO and disaster recovery | High | Not started | — | — | Design recovery plan |
 | Java concurrency, executors and CompletableFuture | High | Not started | — | — | Explain pool sizing and blocking I/O |

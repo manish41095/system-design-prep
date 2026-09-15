@@ -1,6 +1,12 @@
 # Completed Mock Attempts
 
-This directory stores evidence from real attempts. It starts empty except for the reusable template.
+This directory stores evidence from real attempts. Preserve the original answers, then add feedback and corrections separately.
+
+## Attempts
+
+| # | Date | Problem | Type | Score | Status | Re-attempt |
+|---|---|---|---|---:|---|---|
+| 01 | 2026-09-15 | [URL shortener — attempt 01](2026-09-15-url-shortener-attempt-01.md) | HLD | 34/50 | Borderline; stopped during cache deep dive | 2026-09-24 |
 
 ## Naming
 
@@ -8,9 +14,9 @@ Use **YYYY-MM-DD-problem-attempt-NN.md**.
 
 Examples:
 
-- **2026-09-08-url-shortener-attempt-01.md**
-- **2026-09-18-url-shortener-attempt-02.md**
-- **2026-09-20-vending-machine-attempt-01.md**
+- **2026-09-15-url-shortener-attempt-01.md**
+- **2026-09-24-url-shortener-attempt-02.md**
+- **2026-09-25-vending-machine-attempt-01.md**
 
 Put editable Mermaid/Excalidraw sources or Java code beside the attempt, or link to the relevant HLD/LLD folder.
 
@@ -23,4 +29,4 @@ Put editable Mermaid/Excalidraw sources or Java code beside the attempt, or link
 5. Set a re-attempt date 7–14 days later.
 6. On re-attempt, link both attempts and compare specific decisions.
 
-An empty directory means no completed mock yet; do not create fictional scores to make the tracker look active.
+Do not create fictional scores or completed sessions. A low score with precise corrections is useful preparation evidence.
