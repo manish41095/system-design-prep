@@ -52,7 +52,7 @@ The full question prompts and interviewer probes are in the [mock bank](mock-ban
 | 02 | LLD | Vending machine | State pattern, interfaces, Java tests | — | — | — | — |
 | 03 | HLD | Notification system | Kafka, retries, DLQ, idempotency | — | — | — | — |
 | 04 | LLD | Movie ticket booking | Concurrency, locking, state transitions | — | — | — | — |
-| 05 | HLD | Rate limiter | Algorithms, Redis, distributed correctness | — | — | — | — |
+| 05 | HLD | [Rate limiter — attempt 01](mocks/2026-09-24-rate-limiter-attempt-01.md) | Algorithms, Redis, distributed correctness | 2026-09-24 | 36/50 | Redis failure and rule propagation | 2026-10-03 |
 | 06 | HLD | Food delivery | Order lifecycle, location, dispatch | — | — | — | — |
 | 07 | HLD | Media storage | Uploads, metadata, retrieval, cleanup | — | — | — | — |
 | 08 | LLD | Ride sharing | Strategy, matching, state and extensibility | — | — | — | — |
@@ -68,6 +68,9 @@ The queue is a plan, not a deadline. Replace a later problem if mock feedback re
 | 2026-09-15 | URL shortener | QPS/storage calculations were not completed; bytes and KB were confused | Calculation step was skipped | Recalculate QPS/storage and connect every number to a design decision | 2026-09-17 | No |
 | 2026-09-15 | URL shortener | Cache expiry, stampede, hot key and Redis failure were unanswered | Eviction was treated as the complete caching strategy | Draw and explain the four cache failure paths in five minutes | 2026-09-18 | No |
 | 2026-09-15 | URL shortener | Analytics reliability, security, multi-region failure and final summary were not attempted | Mock stopped during the cache deep dive | Deliver a five-minute reliability close and two-minute design summary | 2026-09-20 | No |
+| 2026-09-24 | Rate limiter | Redis failure behavior was not answered | Mock ended before the reliability deep dive | Explain fail-open vs fail-closed and backend protection without notes | 2026-09-26 | No |
+| 2026-09-24 | Rate limiter | Rule propagation consistency and recovery were skipped | The worker was named, but update ordering and stale rules were not explained | Design versioned rule events plus periodic reconciliation | 2026-09-27 | No |
+| 2026-09-24 | Rate limiter | Hot-key and multi-region behavior were not covered | Cluster scaling was explained without global coordination trade-offs | Compare exact global limits with regional quota allocation | 2026-09-29 | No |
 
 Useful feedback is specific: “Could not explain duplicate payment prevention” or “Spent 25 minutes on requirements and did not reach scaling.” Avoid “Need to improve HLD.”
 
