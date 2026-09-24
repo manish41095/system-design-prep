@@ -7,6 +7,7 @@ This directory stores evidence from real attempts. Preserve the original answers
 | # | Date | Problem | Type | Score | Status | Re-attempt |
 |---|---|---|---|---:|---|---|
 | 01 | 2026-09-15 | [URL shortener — attempt 01](2026-09-15-url-shortener-attempt-01.md) | HLD | 34/50 | Borderline; stopped during cache deep dive | 2026-09-24 |
+| 02 | 2026-09-24 | [Distributed rate limiter — attempt 01](2026-09-24-rate-limiter-attempt-01.md) | HLD | 36/50 | Lean Hire; stopped before reliability deep dive | 2026-10-03 |
 
 ## Naming
 
