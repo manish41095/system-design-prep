@@ -50,7 +50,7 @@ The full question prompts and interviewer probes are in the [mock bank](mock-ban
 |---|---|---|---|---|---|---|---|
 | 01 | HLD | [URL shortener prompt](mock-01-url-shortener.md) · [Attempt 01](mocks/2026-09-15-url-shortener-attempt-01.md) | Requirements, estimation, DB, cache | 2026-09-15 | 34/50 | Estimation and cache failure handling | 2026-09-24 |
 | 02 | LLD | Vending machine | State pattern, interfaces, Java tests | — | — | — | — |
-| 03 | HLD | Notification system | Kafka, retries, DLQ, idempotency | — | — | — | — |
+| 03 | HLD | [Notification system — attempt 01](mocks/2026-09-25-notification-system-attempt-01.md) | Kafka, retries, DLQ, idempotency | 2026-09-25 | 37/50 | Outbox and end-to-end deduplication | 2026-10-05 |
 | 04 | LLD | Movie ticket booking | Concurrency, locking, state transitions | — | — | — | — |
 | 05 | HLD | [Rate limiter — attempt 01](mocks/2026-09-24-rate-limiter-attempt-01.md) | Algorithms, Redis, distributed correctness | 2026-09-24 | 36/50 | Redis failure and rule propagation | 2026-10-03 |
 | 06 | HLD | Food delivery | Order lifecycle, location, dispatch | — | — | — | — |
@@ -71,6 +71,9 @@ The queue is a plan, not a deadline. Replace a later problem if mock feedback re
 | 2026-09-24 | Rate limiter | Redis failure behavior was not answered | Mock ended before the reliability deep dive | Explain fail-open vs fail-closed and backend protection without notes | 2026-09-26 | No |
 | 2026-09-24 | Rate limiter | Rule propagation consistency and recovery were skipped | The worker was named, but update ordering and stale rules were not explained | Design versioned rule events plus periodic reconciliation | 2026-09-27 | No |
 | 2026-09-24 | Rate limiter | Hot-key and multi-region behavior were not covered | Cluster scaling was explained without global coordination trade-offs | Compare exact global limits with regional quota allocation | 2026-09-29 | No |
+| 2026-09-25 | Notification system | Database and Kafka dual-write safety was missing | The answer published first and persisted later | Explain transactional outbox and its crash cases | 2026-09-28 | No |
+| 2026-09-25 | Notification system | API idempotency was not connected to worker and provider deduplication | Redis SETNX was treated as the complete duplicate solution | Design durable request idempotency plus idempotent channel workers | 2026-09-29 | No |
+| 2026-09-25 | Notification system | Provider backpressure, callbacks and measurable SLOs were incomplete | The design stopped after retries and DLQ | Explain provider limiting, retry classification, callbacks and three latency SLOs | 2026-10-01 | No |
 
 Useful feedback is specific: “Could not explain duplicate payment prevention” or “Spent 25 minutes on requirements and did not reach scaling.” Avoid “Need to improve HLD.”
 
