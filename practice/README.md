@@ -53,7 +53,7 @@ The full question prompts and interviewer probes are in the [mock bank](mock-ban
 | 03 | HLD | [Notification system — attempt 01](mocks/2026-09-25-notification-system-attempt-01.md) | Kafka, retries, DLQ, idempotency | 2026-09-25 | 37/50 | Outbox and end-to-end deduplication | 2026-10-05 |
 | 04 | LLD | Movie ticket booking | Concurrency, locking, state transitions | — | — | — | — |
 | 05 | HLD | [Rate limiter — attempt 01](mocks/2026-09-24-rate-limiter-attempt-01.md) | Algorithms, Redis, distributed correctness | 2026-09-24 | 36/50 | Redis failure and rule propagation | 2026-10-03 |
-| 06 | HLD | Food delivery | Order lifecycle, location, dispatch | — | — | — | — |
+| 06 | HLD | [Food delivery — attempt 01](mocks/2026-10-01-food-delivery-attempt-01.md) | Order lifecycle, location, dispatch | 2026-10-01 | 39/50 | Failure races and durable idempotency | 2026-10-11 |
 | 07 | HLD | Media storage | Uploads, metadata, retrieval, cleanup | — | — | — | — |
 | 08 | LLD | Ride sharing | Strategy, matching, state and extensibility | — | — | — | — |
 | 09 | HLD | Payment processing | Idempotency, ledger, consistency, recovery | — | — | — | — |
@@ -74,6 +74,9 @@ The queue is a plan, not a deadline. Replace a later problem if mock feedback re
 | 2026-09-25 | Notification system | Database and Kafka dual-write safety was missing | The answer published first and persisted later | Explain transactional outbox and its crash cases | 2026-09-28 | No |
 | 2026-09-25 | Notification system | API idempotency was not connected to worker and provider deduplication | Redis SETNX was treated as the complete duplicate solution | Design durable request idempotency plus idempotent channel workers | 2026-09-29 | No |
 | 2026-09-25 | Notification system | Provider backpressure, callbacks and measurable SLOs were incomplete | The design stopped after retries and DLQ | Explain provider limiting, retry classification, callbacks and three latency SLOs | 2026-10-01 | No |
+| 2026-10-01 | Food delivery | Failure and race-condition deep dive was not attempted | Mock stopped before Q7 | Answer all ten Q7 failure scenarios without notes | 2026-10-04 | No |
+| 2026-10-01 | Food delivery | Exactly-once events were promised | Delivery guarantee was confused with one business outcome | Explain at-least-once plus inbox, state guards and reconciliation | 2026-10-05 | No |
+| 2026-10-01 | Food delivery | A Redis lock was used as durable order idempotency | Concurrent-click protection was treated as crash-safe deduplication | Design a durable idempotency record and three crash cases | 2026-10-06 | No |
 
 Useful feedback is specific: “Could not explain duplicate payment prevention” or “Spent 25 minutes on requirements and did not reach scaling.” Avoid “Need to improve HLD.”
 

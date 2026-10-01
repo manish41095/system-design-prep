@@ -9,7 +9,7 @@ Use 45–60 minutes for a timed attempt. Each problem should have a requirements
 | 3 | Rate limiter | High | Learning | 3/5 | [Attempt 01 — 2026-09-24](../practice/mocks/2026-09-24-rate-limiter-attempt-01.md) | Fix Redis failure and rule propagation; re-attempt 2026-10-03 |
 | 4 | Notification system | High | Learning | 3/5 | [Attempt 01 — 2026-09-25](../practice/mocks/2026-09-25-notification-system-attempt-01.md) | Fix outbox, delivery deduplication and provider backpressure; re-attempt 2026-10-05 |
 | 5 | File storage / media server | High | Not started | — | — | Upload, metadata, retrieval, cleanup |
-| 6 | Food delivery | High | Not started | — | — | Ordering, dispatch, consistency |
+| 6 | Food delivery | High | Learning | 4/5 | [Attempt 01 — 2026-10-01](../practice/mocks/2026-10-01-food-delivery-attempt-01.md) | Fix failure races and durable idempotency; re-attempt 2026-10-11 |
 | 7 | Ride sharing | High | Not started | — | — | Location, matching, trip state |
 | 8 | Stock exchange / order matching | High | Not started | — | — | Ordering, matching, durability |
 | 9 | Movie ticket booking | High | Not started | — | — | Seat contention and reservation TTL |
