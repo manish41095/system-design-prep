@@ -49,7 +49,7 @@ The full question prompts and interviewer probes are in the [mock bank](mock-ban
 | # | Type | Problem | Focus | Date | Score /50 | Top gap | Re-attempt |
 |---|---|---|---|---|---|---|---|
 | 01 | HLD | [URL shortener prompt](mock-01-url-shortener.md) · [Attempt 01](mocks/2026-09-15-url-shortener-attempt-01.md) | Requirements, estimation, DB, cache | 2026-09-15 | 34/50 | Estimation and cache failure handling | 2026-09-24 |
-| 02 | LLD | Vending machine | State pattern, interfaces, Java tests | — | — | — | — |
+| 02 | LLD | [Vending machine — attempt 01](mocks/2026-10-02-vending-machine-attempt-01.md) | State pattern, interfaces, Java tests | 2026-10-02 | 30/50 | Core implementation and rollback | 2026-10-12 |
 | 03 | HLD | [Notification system — attempt 01](mocks/2026-09-25-notification-system-attempt-01.md) | Kafka, retries, DLQ, idempotency | 2026-09-25 | 37/50 | Outbox and end-to-end deduplication | 2026-10-05 |
 | 04 | LLD | Movie ticket booking | Concurrency, locking, state transitions | — | — | — | — |
 | 05 | HLD | [Rate limiter — attempt 01](mocks/2026-09-24-rate-limiter-attempt-01.md) | Algorithms, Redis, distributed correctness | 2026-09-24 | 36/50 | Redis failure and rule propagation | 2026-10-03 |
@@ -77,6 +77,9 @@ The queue is a plan, not a deadline. Replace a later problem if mock feedback re
 | 2026-10-01 | Food delivery | Failure and race-condition deep dive was not attempted | Mock stopped before Q7 | Answer all ten Q7 failure scenarios without notes | 2026-10-04 | No |
 | 2026-10-01 | Food delivery | Exactly-once events were promised | Delivery guarantee was confused with one business outcome | Explain at-least-once plus inbox, state guards and reconciliation | 2026-10-05 | No |
 | 2026-10-01 | Food delivery | A Redis lock was used as durable order idempotency | Concurrent-click protection was treated as crash-safe deduplication | Design a durable idempotency record and three crash cases | 2026-10-06 | No |
+| 2026-10-02 | Vending machine | Core Java implementation and tests were not attempted | Mock stopped at the coding question | Recreate purchase, rollback and tests without notes | 2026-10-05 | No |
+| 2026-10-02 | Vending machine | Singleton was treated as the consistency solution | Object lifecycle was confused with transaction synchronization | Explain per-machine aggregate lifecycle and Singleton drawbacks | 2026-10-06 | No |
+| 2026-10-02 | Vending machine | Greedy change and transaction rollback were incomplete | Limited denomination inventory and escrow were not modeled | Implement bounded exact change and reserve/commit/rollback | 2026-10-07 | No |
 
 Useful feedback is specific: “Could not explain duplicate payment prevention” or “Spent 25 minutes on requirements and did not reach scaling.” Avoid “Need to improve HLD.”
 
