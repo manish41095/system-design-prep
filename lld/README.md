@@ -4,7 +4,7 @@ Practice for 45–60 minute Java interviews. Start with requirements, entities, 
 
 | # | Problem | Priority | Status | Confidence /5 | Last attempt | Next action |
 |---|---|---|---|---|---|---|
-| 1 | Vending machine | High | Not started | — | — | State, inventory, payment, change |
+| 1 | Vending machine | High | Learning | 2/5 | [Attempt 01 — 2026-10-02](../practice/mocks/2026-10-02-vending-machine-attempt-01.md) | Rebuild checkout, exact change and rollback; re-attempt 2026-10-12 |
 | 2 | Parking lot | High | Not started | — | — | Allocation, pricing, concurrency |
 | 3 | Elevator | High | Not started | — | — | Scheduling, state, safety |
 | 4 | Library management | Medium | Not started | — | — | Copy vs book, lending rules |
@@ -27,14 +27,14 @@ Practice for 45–60 minute Java interviews. Start with requirements, entities, 
 |---|---|---|---|
 | Strategy | Not started | — | Pricing, matching or payment selection |
 | Factory / Abstract Factory | Not started | — | Creating notification or payment handlers |
-| State | Not started | — | Vending machine and order lifecycle |
+| State | Learning | 3/5 | [Vending machine states](vending-machine/VendingMachine.java) and order lifecycle |
 | Observer | Not started | — | Domain events / notifications |
 | Decorator | Not started | — | Logging, compression, validation |
 | Adapter | Not started | — | External payment / storage integration |
 | Command | Not started | — | Undoable actions or queued commands |
 | Chain of Responsibility | Not started | — | Validation / request processing |
 | Builder | Not started | — | Complex immutable objects |
-| Singleton | Not started | — | Lifecycle, initialization and testing trade-offs |
+| Singleton | Learning | 2/5 | Explain why per-machine lifecycle does not require a global Singleton |
 | Template Method | Not started | — | Shared processing with extension points |
 | Repository | Not started | — | Persistence abstraction |
 
