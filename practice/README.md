@@ -80,7 +80,6 @@ The queue is a plan, not a deadline. Replace a later problem if mock feedback re
 | 2026-10-02 | Vending machine | Core Java implementation and tests were not attempted | Mock stopped at the coding question | Recreate purchase, rollback and tests without notes | 2026-10-05 | No |
 | 2026-10-02 | Vending machine | Singleton was treated as the consistency solution | Object lifecycle was confused with transaction synchronization | Explain per-machine aggregate lifecycle and Singleton drawbacks | 2026-10-06 | No |
 | 2026-10-02 | Vending machine | Greedy change and transaction rollback were incomplete | Limited denomination inventory and escrow were not modeled | Implement bounded exact change and reserve/commit/rollback | 2026-10-07 | No |
-
 | 2026-10-06 | Payment processing | Multi-region ownership, RPO/RTO and regional failover were not answered | Mock stopped before the disaster-recovery question | Explain the ₹499 regional-outage scenario in three minutes | 2026-10-09 | No |
 | 2026-10-06 | Payment processing | Timeout and idempotency response contracts were initially inconsistent | Resource state and HTTP response semantics were mixed together | Contrast `202 PROCESSING`, `504`, idempotent replay and status lookup | 2026-10-10 | No |
 | 2026-10-06 | Payment processing | The answer contained more detail than fits in 60 minutes | Revision-level detail was used in the live answer | Complete the design using the timed outline and only two deep dives | 2026-10-12 | No |
