@@ -14,7 +14,7 @@ Use 45–60 minutes for a timed attempt. Each problem should have a requirements
 | 8 | Stock exchange / order matching | High | Not started | — | — | Ordering, matching, durability |
 | 9 | Movie ticket booking | High | Not started | — | — | Seat contention and reservation TTL |
 | 10 | E-commerce order and inventory | High | Not started | — | — | Saga, outbox, inventory reservation |
-| 11 | Payment processing | High | Not started | — | — | Idempotency, reconciliation, ledger |
+| 11 | Payment processing | High | Learning | 4/5 | [Attempt 01 — 2026-10-06](../practice/mocks/2026-10-06-payment-processing-attempt-01.md) | Practice multi-region recovery and deliver the design in 45–60 minutes; re-attempt 2026-10-16 |
 | 12 | Chat / messaging | Medium | Not started | — | — | WebSocket, ordering, delivery |
 | 13 | News feed | Medium | Not started | — | — | Fan-out and hot users |
 | 14 | Search / autocomplete | Medium | Not started | — | — | Indexing, ranking, freshness |
