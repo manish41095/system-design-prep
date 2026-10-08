@@ -18,7 +18,7 @@ Use 45–60 minutes for a timed attempt. Each problem should have a requirements
 | 12 | Chat / messaging | Medium | Not started | — | — | WebSocket, ordering, delivery |
 | 13 | News feed | Medium | Not started | — | — | Fan-out and hot users |
 | 14 | Search / autocomplete | Medium | Not started | — | — | Indexing, ranking, freshness |
-| 15 | Distributed job scheduler | High | Not started | — | — | Leases, retries, duplicate execution |
+| 15 | Distributed job scheduler | High | Learning | — | [Revision pack — 2026-10-08](distributed-job-scheduler.md) | Re-attempt without hints; focus on outbox, idempotency, retry/DLQ and burst handling |
 | 16 | Logging and metrics platform | Medium | Not started | — | — | Ingestion, retention, query |
 | 17 | API gateway / service platform | High | Not started | — | — | Routing, auth, limits, discovery |
 | 18 | Video streaming platform | Medium | Not started | — | — | Encoding, CDN, adaptive streaming |
