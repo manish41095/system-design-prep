@@ -12,6 +12,7 @@ This directory stores evidence from real attempts. Preserve the original answers
 | 04 | 2026-10-01 | [Food delivery — attempt 01](2026-10-01-food-delivery-attempt-01.md) | HLD | 39/50 | Lean Hire; stopped before failure deep dive | 2026-10-11 |
 | 05 | 2026-10-02 | [Vending machine — attempt 01](2026-10-02-vending-machine-attempt-01.md) | LLD | 30/50 | Borderline; stopped before implementation | 2026-10-12 |
 | 06 | 2026-10-06 | [Payment processing — attempt 01](2026-10-06-payment-processing-attempt-01.md) | HLD | 44/50 | Hire signal; strong correctness, needs tighter timing and DR close | 2026-10-16 |
+| 07 | 2026-10-08 | [Distributed job scheduler — attempt 01](2026-10-08-distributed-job-scheduler-attempt-01.md) | HLD | Unscored | Completed; stopped during retry/DLQ, score was not recorded | 2026-10-18 |
 
 ## Naming
 
