@@ -18,25 +18,25 @@ Practice for 45–60 minute Java interviews. Start with requirements, entities, 
 | 12 | Rate limiter | High | Not started | — | — | Clock, token bucket, tests |
 | 13 | Logger framework | High | Not started | — | — | Levels, appenders, async queue |
 | 14 | Notification system | High | Not started | — | — | Strategy, factory, retry |
-| 15 | Task scheduler | High | Not started | — | — | Scheduling, cancellation, workers |
+| 15 | [Task scheduler](../practice/mocks/2026-10-10-job-scheduler-lld-attempt-01.md) | High | Learning | 3.9/5 (guided) | [Attempt 01 — 2026-10-10](../practice/mocks/2026-10-10-job-scheduler-lld-attempt-01.md) | Unaided Java implementation; cancellation race and lease recovery |
 | 16 | File storage / media retrieval | High | Not started | — | — | Pluggable storage and fallback |
 
 ## Design-pattern tracker
 
 | Pattern | Status | Confidence /5 | Practice application |
 |---|---|---|---|
-| Strategy | Not started | — | Pricing, matching or payment selection |
-| Factory / Abstract Factory | Not started | — | Creating notification or payment handlers |
+| Strategy | Learning | 3.5/5 | Job scheduling and retry-policy strategies |
+| Factory / Abstract Factory | Learning | 3/5 | Job command registry runtime selection (registry, not necessarily Abstract Factory) |
 | State | Learning | 3/5 | [Vending machine states](vending-machine/VendingMachine.java) and order lifecycle |
 | Observer | Not started | — | Domain events / notifications |
 | Decorator | Not started | — | Logging, compression, validation |
 | Adapter | Not started | — | External payment / storage integration |
-| Command | Not started | — | Undoable actions or queued commands |
+| Command | Learning | 3.5/5 | JobCommand implementations for email, cleanup, report |
 | Chain of Responsibility | Not started | — | Validation / request processing |
 | Builder | Not started | — | Complex immutable objects |
 | Singleton | Learning | 2/5 | Explain why per-machine lifecycle does not require a global Singleton |
 | Template Method | Not started | — | Shared processing with extension points |
-| Repository | Not started | — | Persistence abstraction |
+| Repository | Learning | 3.5/5 | JobInstanceRepository with atomic claims and retry persistence |
 
 ## Java implementation checklist
 
