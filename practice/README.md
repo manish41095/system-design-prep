@@ -58,7 +58,7 @@ The full question prompts and interviewer probes are in the [mock bank](mock-ban
 | 08 | LLD | Ride sharing | Strategy, matching, state and extensibility | — | — | — | — |
 | 09 | HLD | [Payment processing — attempt 01](mocks/2026-10-06-payment-processing-attempt-01.md) | Idempotency, ledger, consistency, recovery | 2026-10-06 | 44/50 | Multi-region recovery and time control | 2026-10-16 |
 | 10 | HLD | [Distributed job scheduler — attempt 01](mocks/2026-10-08-distributed-job-scheduler-attempt-01.md) | Claiming, outbox, idempotency, leases, retry/DLQ | 2026-10-08 | Unscored | Retry/DLQ stopped; re-attempt for scored evidence | 2026-10-18 |
-| 11 | HLD/LLD | Weakest previous problem | Re-solve and defend missed follow-ups | — | — | — | — |
+| 12 | LLD | [Distributed Job Scheduler — attempt 01](mocks/2026-10-10-job-scheduler-lld-attempt-01.md) | Java interfaces, atomic claim, durable retry, graceful shutdown, bulkheads | 2026-10-10 | 39/50 (approx. guided; eight-section mean 7.8/10) | Patterns explained better than independently implemented; cancellation supplied | Before interview: unaided implementation |\n| 11 | HLD/LLD | Weakest previous problem | Re-solve and defend missed follow-ups | — | — | — | — |
 
 The queue is a plan, not a deadline. Replace a later problem if mock feedback reveals a more important gap.
 
