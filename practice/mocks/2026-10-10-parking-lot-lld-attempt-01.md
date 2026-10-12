@@ -1,6 +1,6 @@
 # Parking Lot LLD — Mock 02 and Complete Revision
 
-**Date:** 2026-10-10 (mock started); **revision updated:** 2026-10-12
+**Date:** 2026-10-10 (mock started); **revision updated:** 2026-10-12 (senior-level UML + deep dives)
 **Target:** Schrödinger Senior Software Developer (Backend), Java 21
 **Status:** Partial mock — only requirements answered independently. Sections on design, code, concurrency and edge cases are **reference material**, not independently answered or scored.
 
@@ -64,59 +64,148 @@ Design a multi-level mall parking system with multiple entry/exit gates, Bike/Ca
 - Strategies are **composed**, not inherited by Ticket/Spot.
 - Avoid a god-class ParkingLot implementing selection, payment, pricing and persistence.
 
-### Class sketch
+### Detailed UML — entities, lifecycle, policies and infrastructure (reference)
+
+Use this as a **logical LLD class diagram**. Interfaces are dependency boundaries; DB/adapter classes are implementations. The service orchestrates, while ticket/spot entities retain their invariants.
 
 \`\`\`mermaid
 classDiagram
- class ParkingService {
-   +enter(Vehicle,GateId) ParkingTicket
-   +exit(TicketId,PaymentRequest) Receipt
- }
- class ParkingLot
- class ParkingFloor
- class ParkingSpot {
-   +UUID id
-   +SpotType type
-   +SpotStatus status
- }
- class Vehicle {
-   +String plate
-   +VehicleType type
- }
- class ParkingTicket {
-   +UUID id
-   +UUID spotId
-   +Instant enteredAt
-   +TicketStatus status
- }
- class SpotAllocationStrategy {
-   <<interface>>
-   +candidates(GateId,VehicleType) List~UUID~
- }
- class PricingStrategy {
-   <<interface>>
-   +calculate(ParkingTicket,Instant) Money
- }
- class SpotRepository {
-   <<interface>>
-   +tryReserve(SpotId,TicketId) boolean
-   +release(SpotId,TicketId) boolean
- }
- class TicketRepository {
-   <<interface>>
- }
- class PaymentGateway {
-   <<interface>>
- }
- ParkingLot "1" *-- "*" ParkingFloor
- ParkingFloor "1" *-- "*" ParkingSpot
- ParkingTicket --> Vehicle
- ParkingTicket --> ParkingSpot
- ParkingService --> SpotAllocationStrategy
- ParkingService --> PricingStrategy
- ParkingService --> SpotRepository
- ParkingService --> TicketRepository
- ParkingService --> PaymentGateway
+direction LR
+class ParkingLot {
+  +UUID id
+  +String name
+}
+class ParkingFloor {
+  +UUID id
+  +int floorNumber
+}
+class ParkingSpot {
+  +UUID id
+  +SpotType type
+  +SpotStatus status
+  +UUID currentTicketId
+  +long version
+}
+class Gate {
+  +UUID id
+  +GateType type
+}
+class Vehicle {
+  +String plateNumber
+  +VehicleType type
+}
+class ParkingTicket {
+  +UUID id
+  +String plateNumber
+  +UUID spotId
+  +Instant enteredAt
+  +TicketStatus status
+  +long version
+}
+class Payment {
+  +UUID id
+  +UUID ticketId
+  +String idempotencyKey
+  +Money amount
+  +PaymentStatus status
+  +String providerReference
+}
+class Receipt {
+  +UUID paymentId
+  +UUID ticketId
+  +Money paid
+}
+class ParkingService {
+  +enter(Vehicle, UUID, String) ParkingTicket
+  +requestExit(UUID, String) ExitQuote
+  +finalizeExit(UUID, String) Receipt
+}
+class SpotAllocationStrategy {
+  <<interface>>
+  +rankedCandidates(UUID,VehicleType) List~UUID~
+}
+class NearestGateStrategy {
+  +rankedCandidates(UUID,VehicleType) List~UUID~
+}
+class SpotCompatibilityPolicy {
+  <<interface>>
+  +isCompatible(VehicleType,SpotType) boolean
+}
+class PricingStrategy {
+  <<interface>>
+  +calculate(ParkingTicket,Instant) Money
+}
+class HourlyVehiclePricing {
+  +calculate(ParkingTicket,Instant) Money
+}
+class SpotRepository {
+  <<interface>>
+  +occupyIfFree(UUID,UUID) boolean
+  +releaseIfOwned(UUID,UUID) boolean
+}
+class TicketRepository {
+  <<interface>>
+  +findById(UUID) ParkingTicket
+  +insert(ParkingTicket) void
+}
+class PaymentRepository {
+  <<interface>>
+  +findByKey(String) Payment
+  +save(Payment) void
+}
+class PaymentGateway {
+  <<interface>>
+  +charge(String,Money) ProviderResult
+  +lookup(String) ProviderResult
+}
+class EntryGateController {
+  +admit(Vehicle,String) ParkingTicket
+}
+class ExitGateController {
+  +exit(UUID,String) Receipt
+}
+class AvailabilityService {
+  +getCounts(UUID,SpotType) long
+}
+
+ParkingLot "1" *-- "1..*" ParkingFloor : contains
+ParkingFloor "1" *-- "1..*" ParkingSpot : contains
+ParkingLot "1" o-- "1..*" Gate : serves
+ParkingTicket "0..*" --> "1" ParkingSpot : assigned
+ParkingTicket "0..*" --> "1" Vehicle : identifies
+ParkingTicket "1" --> "0..*" Payment : attempts
+Payment "0..1" --> "0..1" Receipt : settled
+EntryGateController --> ParkingService
+ExitGateController --> ParkingService
+ParkingService --> SpotAllocationStrategy
+ParkingService --> SpotCompatibilityPolicy
+ParkingService --> PricingStrategy
+ParkingService --> SpotRepository
+ParkingService --> TicketRepository
+ParkingService --> PaymentRepository
+ParkingService --> PaymentGateway
+AvailabilityService --> SpotRepository
+SpotAllocationStrategy <|.. NearestGateStrategy
+PricingStrategy <|.. HourlyVehiclePricing
+\`\`\`
+
+**Why these relationships:** ParkingLot/Floor composition represents structural ownership, while Ticket → Spot and Ticket → Vehicle are associations (a ticket does not own the shared spot). Payment is a separate aggregate to support multiple attempts and uncertain provider outcomes. Gates are edge adapters, not the owners of allocation/payment logic. The actual relational model stores foreign keys rather than serializing the entire object graph.
+
+**Aggregate boundaries and invariants:**
+- **Spot:** one active occupant at most; FREE → OCCUPIED → FREE using conditional write and \`currentTicketId\`.
+- **Ticket:** one active ticket per vehicle per lot (partial unique index); ACTIVE → EXIT_AUTHORIZED → CLOSED. Optionally LOST/DISPUTED.
+- **Payment:** INITIATED → SUCCEEDED/FAILED/UNKNOWN; never infer success from a timeout.
+- A **DB transaction** may modify Spot + Ticket atomically for entry; payment network requests occur outside the DB transaction.
+- The UML is intentionally more detailed than the 5-minute interview sketch. Start with 7–9 core entities, expand to adapters/persistence only when probed.
+
+### Interview sketch — first 5 minutes
+
+\`\`\`text
+ParkingLot 1--* Floor 1--* Spot
+Vehicle 1--* Ticket *--1 Spot
+Ticket 1--* Payment
+EntryGate / ExitGate -> ParkingService
+ParkingService -> AllocationStrategy, PricingStrategy, Repositories, PaymentGateway
 \`\`\`
 
 ## 4. Q3 — patterns and SOLID (reference)
@@ -268,6 +357,128 @@ Keep a durable payment state such as INITIATED/SUCCESS/FAILED/UNKNOWN and a sepa
 **What if two ticket IDs are generated during concurrent retry?** Use a stable entry-request idempotency key and unique active-plate constraint; only commit the winning spot+ticket transaction.
 
 **What if payment succeeds and DB fails?** Mark payment UNKNOWN until reconciliation; use gateway idempotency key to retrieve outcome and finalize exit without duplicate charge.
+
+## 10. Senior-level interviewer deep dives — scenario, answer, trade-off and test (reference, NOT scored)
+
+These are structured answers to give **after** presenting the basic design. A senior answer states the invariant, shows an atomic mechanism, names the failure window and explains the trade-off. Avoid merely saying “use synchronized” or “use Redis”.
+
+### Q1. Two entry gates select the same last spot. Prove that double allocation is impossible.
+
+**Answer:** Candidate search is advisory. The reservation decision happens in the database. Transaction T1 conditionally updates spot 42 from FREE to OCCUPIED, assigns its newly generated ticket ID, and inserts the ticket. Transaction T2's conflicting update cannot change that row from FREE and receives zero updated rows after T1 commits; it retries another candidate or returns FULL. A unique active-ticket-per-vehicle constraint independently prevents a second simultaneous entry for the same plate. Roll back both changes if ticket creation fails.
+
+\`\`\`sql
+BEGIN;
+UPDATE parking_spots
+   SET status='OCCUPIED', current_ticket_id=:ticketId,
+       version=version+1
+ WHERE id=:spotId AND status='FREE';
+-- require exactly 1 updated row
+INSERT INTO parking_tickets(id,lot_id,plate_number,spot_id,status,entered_at)
+VALUES (:ticketId,:lotId,:plate,:spotId,'ACTIVE',now());
+COMMIT;
+\`\`\`
+
+**Nuance:** Lock only the chosen rows and keep transaction short. Client timeout after commit requires an **entry request idempotency key** and a durable result lookup. A simple Java \`synchronized\` protects only one JVM and is insufficient across multiple gates/processes.
+
+**Test:** 100 concurrent attempts for one spot → exactly one active ticket, one occupied spot, no orphan ticket.
+
+### Q2. What if payment succeeds at UPI/card provider but our service times out?
+
+**Answer:** A timeout is **UNKNOWN**, not FAILED. Create a persistent payment attempt with idempotency key before invoking the provider. Call provider with the same key on retry; reconcile using provider lookup/webhooks. If SUCCESS, mark payment succeeded once, authorize exit and follow through to release/receipt. If FAILED, retain active ticket/spot; if still UNKNOWN, do not initiate a new charge with a different idempotency key.
+
+\`\`\`text
+INITIATED -> provider charge -> UNKNOWN
+                         |         |
+                      success   lookup/webhook
+                         |         |
+                         +----> SUCCEEDED -> EXIT_AUTHORIZED -> CLOSED
+\`\`\`
+
+**Trade-off:** The user may need to wait for confirmation; no global transaction spans payment provider + our DB. Use provider reconciliation and reliable state transitions.
+
+**Test:** Inject timeout **after provider charges**, replay same exit request → one provider payment, one receipt.
+
+### Q3. How do we keep payment, ticket closure and spot release consistent?
+
+**Answer:** Do not hold a DB transaction open while calling payment APIs. First settle/verify payment; then, in a short local DB transaction, transition the ticket from ACTIVE to EXIT_AUTHORIZED/CLOSED and conditionally release exactly the spot held by that ticket. Use DB uniqueness and state/version predicates to prevent double release. If the DB commit fails, reconciliation retries finalization using persisted provider payment reference/idempotency key. For a physical barrier, paid authorization and actual departure may be separate states.
+
+**Invariant:** No release for an unpaid ordinary exit; no release of a different ticket's spot; at most one final receipt per successful payment/exit.
+
+**Test:** Payment success → DB unavailable → recovery; ticket/spot eventually finalized without another payment.
+
+### Q4. Two exit gates process the same ticket simultaneously: what happens?
+
+**Answer:** Both may read ACTIVE, so initial reads alone are unsafe. Use conditional ticket transition (ACTIVE → EXIT_PROCESSING/EXIT_AUTHORIZED) and a unique payment idempotency key. One exit command wins; second receives existing status/result or observes in-progress payment. Avoid duplicate provider calls if possible and always send the same provider key on uncertain retries. A spot release requires the expected \`current_ticket_id\`.
+
+**Test:** Concurrent duplicate exit calls → one payment outcome and one spot release.
+
+### Q5. Is “nearest spot” really O(1)? Show the data structure and complexity.
+
+**Answer:** It is nearest **to a specific gate**, not globally. Precompute distance/gate ranking per spot where layout is stable. Candidate retrieval can use a sorted index on \`(gate_id, spot_type, distance, spot_id)\` with an availability filter; maintain free-spot indexes or query a ranking table joined to current FREE spots. In-memory per-gate \`TreeSet\` gives O(log n) insert/remove and fast head selection, but updating all gate indexes is a trade-off. Atomic DB reservation is still mandatory.
+
+**Trade-offs:** O(1) head access does not mean the full allocation is O(1); remote DB roundtrips, contention, index maintenance and fallbacks all matter. Favor an indexed DB-first implementation until scale proves a cache necessary.
+
+### Q6. What is the aggregate boundary: ParkingLot, Spot, Ticket or Payment?
+
+**Answer:** Avoid one enormous ParkingLot aggregate locking the entire mall. Spot is the small occupancy invariant, Ticket is the parking-session lifecycle, Payment is a separately persisted aggregate with provider retries. The entry application service coordinates a short local DB transaction across Spot/Ticket rows. This is pragmatic relational consistency, not a claim that every row is inside one DDD aggregate.
+
+**Trade-off:** Smaller aggregates improve concurrency. Cross-aggregate workflows require explicit transactions/processes and reconciliation.
+
+### Q7. The same car enters from two gates with the same plate. Redis lock or DB unique key?
+
+**Answer:** **DB unique active-session constraint** is authoritative. A Redis lock may reduce duplicate work but expires, can split under failover and does not provide durable uniqueness. Capture \`entryRequestId\` as a unique idempotency key so client retries return the original ticket. The spot update and ticket insert must commit atomically.
+
+**Test:** Same-plate requests race for two different spots → only one active ticket, only one spot remains occupied after rollback of losing transaction.
+
+### Q8. What if the barrier fails after a successful payment?
+
+**Answer:** Introduce separate \`EXIT_AUTHORIZED\` vs \`CLOSED/DEPARTED\` states. The system keeps a durable gate-open command with retry ID; attempts to open the barrier can be retried idempotently. Confirm actual departure via gate acknowledgment or sensor where available, then release the spot. Without physical confirmation, define a timeout/manual reconciliation policy rather than silently marking the vehicle departed. Hardware is outside the DB transaction.
+
+### Q9. Availability says 1 FREE but allocation returns FULL. Is that a bug?
+
+**Answer:** Not necessarily. Availability is often eventually consistent and may lag active reservations; only atomic reservation decides. Display the count as advisory and refresh after a conflict. For stricter counters, update them within the same DB transaction as occupancy or derive them periodically; cached views still need reconciliation.
+
+### Q10. An existing Car is upgraded to an EV that needs charging; will OCP still hold?
+
+**Answer:** Replace brittle “one enum ↔ one spot enum” logic with a \`SpotCompatibilityPolicy\` that checks dimensions, type and capabilities (\`CHARGING\`, \`ACCESSIBLE\`, etc.). New pricing/allocation policies plug in as strategies. Adding new capability data or configuration is expected; OCP doesn't prohibit all schema/config changes.
+
+### Q11. How do we handle spot maintenance while a gate attempts allocation?
+
+**Answer:** Model FREE, RESERVED/OCCUPIED and OUT_OF_SERVICE as distinct states. The conditional claim requires FREE, so maintenance marking and allocation race at the row. A spot currently occupied cannot be deactivated without a defined transition; maintenance request may become PENDING_MAINTENANCE until departure.
+
+### Q12. Can an operator “just force close” a stuck ticket?
+
+**Answer:** Provide privileged, audited overrides recording reason/operator/time and financial impact. Require explicit policy for missing payment, spot occupancy/sensor mismatch and refund. Never mutate a historical charge invisibly. An override should use the same conditional state transitions/idempotency protections as normal exit.
+
+### Q13. What happens when a DB instance fails mid-entry?
+
+**Answer:** If transaction did not commit, no ticket or occupancy change persists. If it committed but client didn't get response, the client reuses \`entryRequestId\` and fetches original ticket. If DB is unavailable, reject new admission rather than issuing a non-durable ticket unless an explicitly designed offline mode exists. Offline mode is a separate requirement with reconciliation and collision handling.
+
+### Q14. How would you unit-test and integration-test this design?
+
+**Answer:** Unit-test strategy selection/pricing using injected \`Clock\`, boundary durations, overnight stays and vehicle tariffs. Integration-test last-spot races and active-plate unique constraints against PostgreSQL (in-memory mocks cannot prove locking behavior). Add failure injection for provider charged-then-timeout, DB failure after payment, duplicate entry/exit, barrier timeout, availability drift and restart with active tickets.
+
+### Q15. How should the solution scale if the mall grows to 100 floors and 30 gates?
+
+**Answer:** Index candidate selection rather than scanning all spots; cache immutable gate-distance data, not authoritative occupancy; use per-lot/per-zone grouping only if contention measurements demand it; keep transactions short and maintain minimal indexes on hot occupancy rows. Profile p95 allocation latency, DB lock waits, conflicts, payment reconciliation age and available-spot counter drift. Start with one database transaction boundary before proposing sharding or distributed locks.
+
+### Q16. What security and operations concerns would you mention?
+
+**Answer:** Authenticate admin/gate devices, authorize overrides, do not trust plate/gate inputs blindly, encrypt sensitive payment references, use provider tokens instead of storing card credentials, retain audit trails for gate opening/refunds, add alerts for stale ACTIVE tickets, UNKNOWN payments and mismatched occupancy. Rate-limit duplicate gate attempts and reconcile external sensors.
+
+### Q17. How would you explain inheritance vs composition here?
+
+**Answer:** Use composition for tariff, allocation and compatibility behaviors because these vary independently. A \`VehicleType\` value suffices for Bike/Car/Truck if they only differ in data; create subclasses only when behavior really differs. EntryGate/ExitGate may share interface or Gate superclass, but gate controllers and ParkingService should not duplicate payment/allocation business rules.
+
+### Q18. Which design choices are overengineering for a 45-minute LLD?
+
+**Answer:** Don't introduce Kafka, service mesh, distributed locking and twenty patterns for a single-mall problem by default. Start with 7 core types, Strategy for selection/pricing, repository interfaces, and a transactional enter/exit flow. Add adapters, reconciliation, state machine and scalability only as deeper follow-ups. The strongest answer presents **correctness before infrastructure**.
+
+### Interview-ready 90-second senior summary
+
+> “My main invariants are one active ticket per vehicle and one occupant per spot. I would model ParkingLot, Floor, Spot, Vehicle and Ticket, while separating allocation and pricing as strategies. Entry first finds a ranked candidate for the chosen gate, but the spot is allocated only by a conditional database update in the same transaction as ticket creation. This prevents two gates from selling the last spot. On exit, pricing computes the charge and a durable idempotent payment flow handles provider timeouts. Once payment is confirmed, a short transaction authorizes exit and releases the spot at the appropriate physical-departure boundary. I would use DB uniqueness and state/version checks for duplicate requests, not Redis locks as the sole protection. The design is extensible for new vehicles and pricing policies, and I would test last-spot races, duplicate entry/exit, payment uncertainty and gate failures.”
+
+---
 
 ## 10. Interview timing and 2-minute summary
 
