@@ -5,7 +5,7 @@ Practice for 45–60 minute Java interviews. Start with requirements, entities, 
 | # | Problem | Priority | Status | Confidence /5 | Last attempt | Next action |
 |---|---|---|---|---|---|---|
 | 1 | Vending machine | High | Learning | 2/5 | [Attempt 01 — 2026-10-02](../practice/mocks/2026-10-02-vending-machine-attempt-01.md) | Rebuild checkout, exact change and rollback; re-attempt 2026-10-12 |
-| 2 | Parking lot | High | Not started | — | — | Allocation, pricing, concurrency |
+| 2 | [Parking lot](../practice/mocks/2026-10-10-parking-lot-lld-attempt-01.md) | High | Learning (partial mock) | 4.25/5 (requirements only) | [Attempt 01 — 2026-10-10](../practice/mocks/2026-10-10-parking-lot-lld-attempt-01.md) | Independently design classes and code concurrent entry/exit; reference notes added 2026-10-12 |
 | 3 | Elevator | High | Not started | — | — | Scheduling, state, safety |
 | 4 | Library management | Medium | Not started | — | — | Copy vs book, lending rules |
 | 5 | Movie ticket booking | High | Not started | — | — | Seat locking, expiry, payment |
