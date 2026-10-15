@@ -28,6 +28,8 @@ Use a 45–60 minute timer and no notes. Ask another person or ChatGPT to act as
 
 For HLD, spend approximately 5 minutes on requirements, 5 on estimates, 5 on APIs/data, 15 on architecture, 15 on deep dives and 5–10 on failures/trade-offs. For LLD, spend approximately 5 on requirements, 10 on entities/classes, 5 on patterns, 25 on code/tests and 5–10 on trade-offs. Adjust based on the interviewer. The [answer framework](answer-framework.md) gives the complete speaking structure.
 
+**Hard 60-minute rule:** finish breadth before depth. Ask at most one short clarification follow-up per section, select only two deep dives, give a five-minute warning at minute 50 and stop at minute 60. Unasked edge cases belong in post-mock feedback, not the live interview.
+
 ## Scoring rubric
 
 Score each category from 0 to 10. A score of 5 means partial understanding; 7 means a reasonable solution with gaps; 9–10 requires a clear, defensible answer with strong follow-ups.
@@ -59,6 +61,7 @@ The full question prompts and interviewer probes are in the [mock bank](mock-ban
 | 09 | HLD | [Payment processing — attempt 01](mocks/2026-10-06-payment-processing-attempt-01.md) | Idempotency, ledger, consistency, recovery | 2026-10-06 | 44/50 | Multi-region recovery and time control | 2026-10-16 |
 | 10 | HLD | [Distributed job scheduler — attempt 01](mocks/2026-10-08-distributed-job-scheduler-attempt-01.md) | Claiming, outbox, idempotency, leases, retry/DLQ | 2026-10-08 | Unscored | Retry/DLQ stopped; re-attempt for scored evidence | 2026-10-18 |
 | 12 | LLD | [Distributed Job Scheduler — attempt 01](mocks/2026-10-10-job-scheduler-lld-attempt-01.md) | Java interfaces, atomic claim, durable retry, graceful shutdown, bulkheads | 2026-10-10 | 39/50 (approx. guided; eight-section mean 7.8/10) | Patterns explained better than independently implemented; cancellation supplied | Before interview: unaided implementation |
+| 13 | HLD | [E-commerce order and inventory — attempt 01](mocks/2026-10-15-ecommerce-order-inventory-attempt-01.md) | Reservation, overselling, Saga, payment failure | 2026-10-15 | 28/50 partial | Architecture and reservation concurrency not reached | 2026-10-25 |
 | 11 | HLD/LLD | Weakest previous problem | Re-solve and defend missed follow-ups | — | — | — | — |
 
 The queue is a plan, not a deadline. Replace a later problem if mock feedback reveals a more important gap.
@@ -89,6 +92,9 @@ The queue is a plan, not a deadline. Replace a later problem if mock feedback re
 | 2026-10-06 | Payment processing | Timeout and idempotency response contracts were initially inconsistent | Resource state and HTTP response semantics were mixed together | Contrast `202 PROCESSING`, `504`, idempotent replay and status lookup | 2026-10-10 | No |
 | 2026-10-06 | Payment processing | The answer contained more detail than fits in 60 minutes | Revision-level detail was used in the live answer | Complete the design using the timed outline and only two deep dives | 2026-10-12 | No |
 | 2026-10-08 | Distributed job scheduler | Retry classification, durable backoff and DLQ replay were not completed | Mock stopped at the retry/DLQ question | Explain retry versus permanent failure, jitter, storm protection and safe DLQ replay | 2026-10-12 | No |
+| 2026-10-15 | E-commerce order and inventory | Inventory reservation states were mixed with fulfilment states | Order, payment and reservation lifecycles were not separated | Explain the three state machines and valid transitions | 2026-10-18 | No |
+| 2026-10-15 | E-commerce order and inventory | Atomic stock reservation and overselling prevention were not reached | The mock stopped before the concurrency deep dive | Write and explain the conditional inventory update | 2026-10-19 | No |
+| 2026-10-15 | E-commerce order and inventory | Architecture and Saga recovery were not attempted | Too many granular follow-ups consumed the one-hour budget | Redo using the hard 60-minute format with only two deep dives | 2026-10-25 | No |
 
 Useful feedback is specific: “Could not explain duplicate payment prevention” or “Spent 25 minutes on requirements and did not reach scaling.” Avoid “Need to improve HLD.”
 
