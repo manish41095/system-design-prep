@@ -13,7 +13,7 @@ Use 45–60 minutes for a timed attempt. Each problem should have a requirements
 | 7 | Ride sharing | High | Not started | — | — | Location, matching, trip state |
 | 8 | Stock exchange / order matching | High | Not started | — | — | Ordering, matching, durability |
 | 9 | Movie ticket booking | High | Not started | — | — | Seat contention and reservation TTL |
-| 10 | E-commerce order and inventory | High | Not started | — | — | Saga, outbox, inventory reservation |
+| 10 | E-commerce order and inventory | High | Learning | 2/5 | [Attempt 01 — 2026-10-15](../practice/mocks/2026-10-15-ecommerce-order-inventory-attempt-01.md) | Practise atomic reservation and Saga recovery; re-attempt within 60 minutes on 2026-10-25 |
 | 11 | Payment processing | High | Learning | 4/5 | [Attempt 01 — 2026-10-06](../practice/mocks/2026-10-06-payment-processing-attempt-01.md) | Practice multi-region recovery and deliver the design in 45–60 minutes; re-attempt 2026-10-16 |
 | 12 | Chat / messaging | Medium | Not started | — | — | WebSocket, ordering, delivery |
 | 13 | News feed | Medium | Not started | — | — | Fan-out and hot users |

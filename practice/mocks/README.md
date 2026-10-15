@@ -13,6 +13,7 @@ This directory stores evidence from real attempts. Preserve the original answers
 | 05 | 2026-10-02 | [Vending machine — attempt 01](2026-10-02-vending-machine-attempt-01.md) | LLD | 30/50 | Borderline; stopped before implementation | 2026-10-12 |
 | 06 | 2026-10-06 | [Payment processing — attempt 01](2026-10-06-payment-processing-attempt-01.md) | HLD | 44/50 | Hire signal; strong correctness, needs tighter timing and DR close | 2026-10-16 |
 | 07 | 2026-10-08 | [Distributed job scheduler — attempt 01](2026-10-08-distributed-job-scheduler-attempt-01.md) | HLD | Unscored | Completed; stopped during retry/DLQ, score was not recorded | 2026-10-18 |
+| 08 | 2026-10-15 | [E-commerce order and inventory — attempt 01](2026-10-15-ecommerce-order-inventory-attempt-01.md) | HLD | 28/50 partial | Incomplete; stopped before architecture and deep dives | 2026-10-25 |
 
 ## Naming
 
