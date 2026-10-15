@@ -18,6 +18,16 @@ Use this framework from memory. It is a speaking guide, not a script to recite.
 | 43–52 min | Reliability | Failures, retries, idempotency, observability, security |
 | 52–60 min | Trade-offs and close | Alternatives, bottleneck, evolution path, summary |
 
+### Hard-stop protocol
+
+- Breadth comes first: reach architecture before beginning detailed follow-ups.
+- Ask at most one short clarification follow-up per section.
+- Select only two problem-specific deep dives.
+- At minute 43, move to reliability even if a deep dive is unfinished.
+- Give a five-minute warning at minute 50.
+- Stop the live mock at minute 60 and put remaining questions in post-mock feedback.
+- A follow-up must replace another topic; it must not extend the interview.
+
 Do not estimate numbers that will not influence a decision. State assumptions and ask the interviewer to confirm them.
 
 ## LLD timebox
